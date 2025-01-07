@@ -3,6 +3,11 @@
 @use 'hero';
 @use 'shows';
 @use 'plans';
+@use 'avalible-device';
+@use 'faq';
+@use 'footer';
+@use 'header';
+@use "sass:color";
 
 @font-face {
     font-family: Avenir;
@@ -30,43 +35,143 @@ body {
 
 .text--big {
     @include m.text(18px);
+
+    @media (max-width: 768px) {
+        @include m.text(15px)
+    }
 }
 
 .text {
     @include m.text;
+
+    @media (max-width: 768px) {
+        @include m.text(14px)
+    }
 }
 
 .text--small {
     @include m.text(12px);
+
+    @media (max-width: 768px) {
+        @include m.text(11px)
+    }
 }
 
 .link-text {
     @include m.text(18px);
     color: vars.$corTextoSecundario;
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 .title--big {
     @include m.title(44px);
+
+    @media (max-width: 768px) {
+        @include m.title(26px)
+    }
 }
 
 .title {
     @include m.title;
+
+    @media (max-width: 768px) {
+        @include m.title(24px)
+    }
 }
 
 .title--small {
     @include m.title(28px);
+
+    @media (max-width: 768px) {
+        @include m.title(22px)
+    }
 }
 
 .button {
-    display: block;
-    margin-top: 2vw;
-    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 60px;
-    font-size: 18px;
+    height: 45px;
+    font-size: 15px;
     color: vars.$corTextoSecundario;
     background-color: vars.$corFundoBtn;
     text-transform: uppercase;
     border-radius: 4px;
+    text-decoration: none;
+    padding: 8px 14px;
+    letter-spacing: 1px;
+    border: 1px solid vars.$corFundoBtn;
+
+    &:hover {
+        background-color: color.scale(vars.$corFundoBtn, $lightness: 3%);
+    }  
+
+    &--secondary {
+        background-color: vars.$corFundoBtnSecundario;
+        border: 1px solid vars.$corFundoBtnSecundario;
+
+        &:hover {
+            background-color: color.scale(vars.$corFundoBtnSecundario, $lightness: 3%);
+        }        
+    }
+
+    &--dark {
+        background-color: rgba(vars.$corFundoBtnDark, 0.8);
+        border: 1px solid vars.$corTextoSecundario;
+
+        &:hover {
+            background-color: vars.$corTextoSecundario;
+            color: vars.$corDeFundo;
+        }
+    }
+}
+
+.image-text-section {
+    padding: 5.6vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        display: block;
+    }
+    
+    img {
+        max-width: 100%;
+    }
+
+    &__text_container {
+        padding: 0 2vw;
+
+        h2 {
+            margin-bottom: 24px;
+        }
+    }
+
+    &--image-full-width {
+        display: block;
+        position: relative;
+
+        img {
+            width: 100%;
+        }
+
+        &__text_container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: calc(50% - 5.6vw);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            @media (max-width: 768px) {
+                position: relative;
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
 }
